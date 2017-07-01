@@ -1,3 +1,3 @@
 # algorithm
 
-# some algorithm implementations
+some algorithm implementations
