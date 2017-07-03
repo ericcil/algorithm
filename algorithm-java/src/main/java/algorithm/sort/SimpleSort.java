@@ -42,6 +42,28 @@ public class SimpleSort {
 		System.out.println(count);
 	}
 	
+	/**
+	 * 《算法》P163希尔排序
+	 * @param source
+	 */
+	public static void shellSort(int[] source){
+		int len = source.length;
+		int h = 1;
+		while(h<len/3){
+			h=3*h + 1;
+		}
+		int count = 0;
+		while(h>=1){
+			for(int i = h;i<len;i++){//向右推进
+				for(int j=i;j>=h && source[j] < source[j-h];j-=h){//按步进向左比较
+					print(source);
+					exchange(source,j,j-h);
+				}
+			}
+			h = h/3;//收索比较的步进
+		}
+		System.out.println(count);
+	}
 	
 	
 	public static void exchange(int[] source,int first,int second){
@@ -59,8 +81,9 @@ public class SimpleSort {
 	
 	public static void main(String[] args) {
 		int[] source = {32,7,2,4,6};
-		selectionSort(source);
+		//selectionSort(source);
 		//insertionSort(source);
+		shellSort(source);
 		for(int i:source){
 			System.out.print(i+",");
 		}
