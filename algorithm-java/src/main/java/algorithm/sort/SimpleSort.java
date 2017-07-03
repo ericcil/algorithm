@@ -11,7 +11,7 @@ public class SimpleSort {
 		int count = 0;
 		for(int i=0;i<len;i++){
 			int min = i;
-			for(int j=i+1;j<len;j++){//执行次数为(n-1)+...+2+1
+			for(int j=i+1;j<len;j++){//执行次数为(n-1)+...+2+1 每次选出右边最小的数放到左边
 				count++;
 				if(source[j]<source[min]){
 					min = j;
@@ -32,11 +32,11 @@ public class SimpleSort {
 	public static void insertionSort(int[] source){
 		int len = source.length;
 		int count = 0;
-		for(int i=1;i<len;i++){
-			for(int j=i;j>0 && source[j]<source[j-1];j--){
+		for(int i=1;i<len;i++){//每次处理完左边都是有序列
+			for(int j=i;j>0 && source[j]<source[j-1];j--){//将右端的数向左做对比,冒泡
 				count++;
 				exchange(source,j,j-1);
-				//print(source);
+				print(source);
 			}
 		}
 		System.out.println(count);
@@ -58,9 +58,9 @@ public class SimpleSort {
 	}
 	
 	public static void main(String[] args) {
-		int[] source = {31,4,43,5,4,10,1,40};
-		//selectionSort(source);
-		insertionSort(source);
+		int[] source = {32,7,2,4,6};
+		selectionSort(source);
+		//insertionSort(source);
 		for(int i:source){
 			System.out.print(i+",");
 		}
