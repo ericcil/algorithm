@@ -1,7 +1,12 @@
 package algorithm.sort;
 
 import java.util.Random;
+import static algorithm.util.UtilTools.exchange;
+import static algorithm.util.UtilTools.print;
 
+/**
+ * 这些排序算法不需要额外的空间（除开交换时，交换时也可以改成不需要额外空间）
+ */
 public class SimpleSort {
 
 	/**
@@ -69,18 +74,7 @@ public class SimpleSort {
 	}
 	
 	
-	public static void exchange(int[] source,int first,int second){
-		int temp = source[first];
-		source[first] = source[second];
-		source[second] = temp;
-	}
 	
-	public static void print(int[] source){
-		for(int i:source){
-			System.out.print(i+",");
-		}
-		System.out.println();
-	}
 	
 	public static void main(String[] args) {
 		int[] source = new int[10000];
