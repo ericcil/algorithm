@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import java.util.Random;
+
 public class SimpleSort {
 
 	/**
@@ -12,12 +14,12 @@ public class SimpleSort {
 		for(int i=0;i<len;i++){
 			int min = i;
 			for(int j=i+1;j<len;j++){//执行次数为(n-1)+...+2+1 每次选出右边最小的数放到左边
-				count++;
 				if(source[j]<source[min]){
 					min = j;
 				}
 			}
 			if(i!=min){
+				count++;
 				exchange(source,i,min);
 				//print(source);
 			}
@@ -36,7 +38,7 @@ public class SimpleSort {
 			for(int j=i;j>0 && source[j]<source[j-1];j--){//将右端的数向左做对比,冒泡
 				count++;
 				exchange(source,j,j-1);
-				print(source);
+				//print(source);
 			}
 		}
 		System.out.println(count);
@@ -53,10 +55,11 @@ public class SimpleSort {
 			h=3*h + 1;
 		}
 		int count = 0;
-		while(h>=1){
+		while(h>=1){//相对于插入排序，希尔排序初始的步进>1，逐步增加左边数列列的有序性，对应最终步进为1时的比较总量小于插入排序
 			for(int i = h;i<len;i++){//向右推进
 				for(int j=i;j>=h && source[j] < source[j-h];j-=h){//按步进向左比较
-					print(source);
+					count++;
+					//print(source);
 					exchange(source,j,j-h);
 				}
 			}
@@ -80,12 +83,17 @@ public class SimpleSort {
 	}
 	
 	public static void main(String[] args) {
-		int[] source = {32,7,2,4,6};
+		int[] source = new int[10000];
+		Random r = new Random();
+		for(int i=0;i<source.length;i++){
+			source[i] = r.nextInt(300);
+		}
+		print(source);
+		Long begin = System.currentTimeMillis();
 		//selectionSort(source);
 		//insertionSort(source);
 		shellSort(source);
-		for(int i:source){
-			System.out.print(i+",");
-		}
+		System.out.println(System.currentTimeMillis()-begin+"ms");
+		print(source);
 	}
 }
