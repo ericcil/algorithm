@@ -5,7 +5,7 @@ import static algorithm.util.UtilTools.print;
 import java.util.Random;
 
 /**
- *
+ * 归并排序
  */
 public class MergeSort {
 
@@ -19,7 +19,8 @@ public class MergeSort {
 		}
 		print(source);
 		temp = new int[source.length];
-		topDownMergeSort(source,0,source.length-1);
+		//topDownMergeSort(source,0,source.length-1);
+		downTopMergeSort(source);
 		print(source);
 	}
 	
@@ -42,6 +43,20 @@ public class MergeSort {
 		topDownMergeSort(source,low,mid);
 		topDownMergeSort(source,mid+1,hig);
 		merge(source,low,mid,hig);
+	}
+	
+	
+	/**
+	 * 自底向上的归并排序
+	 * @param source
+	 */
+	public static void downTopMergeSort(int[] source){
+		int len = source.length;
+		for(int step =1;step<len;step = 2*step){//按步进逐步扩大，细分数列
+			for(int lo=0;lo<len-step;lo=lo+2*step){//排序数列
+				merge(source,lo,lo+step-1,Math.min(lo+2*step-1, len-1));
+			}
+		}
 	}
 	
 	
