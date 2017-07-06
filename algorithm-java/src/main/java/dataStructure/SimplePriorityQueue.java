@@ -11,6 +11,16 @@ import java.util.PriorityQueue;
  */
 public class SimplePriorityQueue {
 
+	/**
+	 * 使用数组，实现二叉堆结构
+	 * 完全二叉树：叶子节点都集中在该层最左边的若干位置
+	 * 不使用[0]元素，根节点为元素[1]
+	 * 堆结构对应数组元素下标为：
+	 *      [1]
+	 *  [2]    [3]
+	 * [4][5][6][7]
+	 * 
+	 */
 	private Integer[] heap;
 	private int size = 0;
 	
