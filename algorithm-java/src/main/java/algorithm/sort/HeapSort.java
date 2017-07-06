@@ -6,6 +6,9 @@ import static algorithm.util.UtilTools.print;
 import java.util.Random;
 /**
  * 堆排序，使用优先队列的结构进行排序
+ * 将N个元素排序，只需要少于2NlgN+2N次比较
+ * 无法利用缓存，数组元素很少和相邻的其他元素进行比较，
+ * 因此缓存未命中的次数要远高于大多数比较都在相邻元素间进行的算法
  * @author chenyubin
  *
  */
@@ -24,6 +27,10 @@ public class HeapSort {
 	}
 	
 	
+	/**
+	 * 《算法》 P206
+	 * @param source
+	 */
 	public static void heapSort(int[] source){
 		int lastIndex = source.length - 1;
 		for(int i=lastIndex/2;i>=0;i--){//从倒数第二层开始下沉，将堆有序化
