@@ -1,5 +1,8 @@
 package algorithm.search;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 二叉查找树
  * 
@@ -64,6 +67,20 @@ public class BST {
 		return min(root).key;
 	}
 	
+	private Node min(Node x){
+		if(x.left == null) return x;
+		return min(x.left);
+	}
+	
+	public String max(){
+		return max(root).key;
+	}
+	
+	private Node max(Node x){
+		if(x.right == null) return x;
+		return max(x.right);
+	}
+	
 	/**
 	 * 选则第k个key
 	 * @param k
@@ -106,10 +123,69 @@ public class BST {
 		}
 	}
 	
-	public Node min(Node x){
-		if(x.left == null) return x;
-		return min(x.left);
+	/**
+	 * 删除最小值
+	 */
+	public void deleteMin(){
+		root = deleteMin(root);
 	}
+	
+	private Node deleteMin(Node x){
+		if(x.left == null) return x.right;//递归直到左树为空，即没有更小的，则将右树挂钩
+		x.left = deleteMin(x.left);
+		x.n = size(x.left) + size(x.right) + 1;
+		return x;
+	}
+	
+	public void delete(String key){
+		root = delete(root,key);
+	}
+	
+	public Node delete(Node x,String key){
+		if(x == null) return null;
+		int cmp = key.compareTo(x.key);
+		if(cmp < 0){
+			x.left = delete(x.left,key);//左移指针
+		}else if(cmp > 0){
+			x.right = delete(x.right,key);//右移指针
+		}else{
+			if(x.right == null) return x.left;//如果该节点只有一边有子树，则直接挂钩子树
+			if(x.left == null) return x.right;
+			//当前要删除的节点含有两个子树时
+			Node t = x;
+			x = min(t.right);//取右树最小，根据二叉查找树定义，该节点一定比左树所有值都大
+			x.right = deleteMin(t.right);//删除右树最小值
+			x.left = t.left;
+		}
+		x.n = size(x.left) + size(x.right) + 1;
+		return x; 
+	}
+	
+	public Iterable<String> keys(){
+		return keys(min(),max());
+	}
+	
+	/**
+	 * 获取给定范围内keys
+	 * @param low
+	 * @param hig
+	 * @return
+	 */
+	public Iterable<String> keys(String low,String hig){
+		Queue<String> queue = new LinkedList<String>();
+		keys(root,queue,low,hig);
+		return queue;
+	}
+	
+	private void keys(Node x,Queue<String> queue,String low,String hig){
+		if(x == null)return;
+		int cmplo = low.compareTo(x.key);
+		int cmphi = hig.compareTo(x.key);
+		if(cmplo < 0) keys(x.left,queue,low,hig);
+		if(cmplo <= 0 && cmphi >= 0) queue.add(x.key);
+		if(cmphi > 0) keys(x.right,queue,low,hig);
+	}
+	
 	
 	public class Node{
 		private String key;//键
