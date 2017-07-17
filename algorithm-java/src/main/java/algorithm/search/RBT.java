@@ -61,7 +61,38 @@ public class RBT {
 		h.right.color = BLACK;
 	}
 	
-	public boolean isRead(Node x){
+	public void put(String key,String val){
+		root = put(root,key,val);
+		root.color = BLACK;
+	}
+	
+	private Node put(Node h,String key,String val){
+		if(h == null){
+			return new Node(key,val,1,RED);
+		}
+		int cmp = key.compareTo(h.key);
+		if(cmp < 0){
+			h.left = put(h.left,key,val);
+		}else if(cmp>0){
+			h.right = put(h.right,key,val);
+		}else{
+			h.val = val;//key相等的val更新操作
+		}
+		if(isRed(h.right) && !isRed(h.left)){//右边为红链左边为黑链，进行左旋
+			h = rotateLeft(h);
+		}
+		if(isRed(h.left) && isRed(h.left.left)){//左边为红链，左边的左边也为红链，进行右旋
+			h = rotateRight(h);
+		}
+		if(isRed(h.left) && isRed(h.right)){//两边都为红链，改变颜色
+			flipColors(h);
+		}
+		h.n = size(h.left) + size(h.right) + 1;
+		return h;
+	}
+	
+	
+	public boolean isRed(Node x){
 		if(x == null) return false;
 		return x.color == RED;
 	}
