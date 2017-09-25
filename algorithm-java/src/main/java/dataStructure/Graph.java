@@ -11,27 +11,27 @@ public abstract class Graph {
 	 * 获取该图的顶点数
 	 * @return
 	 */
-	abstract int V();
+	public abstract int V();
 	
 	/**
 	 * 获取该图的边数
 	 * @return
 	 */
-	abstract int E();
+	public abstract int E();
 	
 	/**
 	 * 向图中添加一条连接顶点v和顶点w的边
 	 * @param v
 	 * @param w
 	 */
-	abstract void addEdge(int v,int w);
+	public abstract void addEdge(int v,int w);
 	
 	/**
 	 * 获取和顶点v相邻的所有顶点
 	 * @param v
 	 * @return
 	 */
-	abstract Iterable<Integer> adj(int v);
+	public abstract Iterable<Integer> adj(int v);
 	
 	
 	/**
@@ -85,7 +85,7 @@ public abstract class Graph {
 	}
 	
 	public String toString(){
-		String s = " vertices, " + " edges\n";
+		String s = V() + " vertices, " + E() + " edges\n";
 		for(int v = 0;v<this.V();v++){
 			s += v + ": ";
 			for(int w : this.adj(v)){
