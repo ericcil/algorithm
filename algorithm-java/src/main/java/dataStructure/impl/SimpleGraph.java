@@ -2,6 +2,11 @@ package dataStructure.impl;
 
 import dataStructure.Graph;
 
+/**
+ * 邻接表实现图
+ * @author chenyubin
+ *
+ */
 public class SimpleGraph extends Graph{
 
 	public int V;	//顶点数
@@ -31,7 +36,7 @@ public class SimpleGraph extends Graph{
 
 	@Override
 	public void addEdge(int v, int w) {
-		adj[v].add(w);
+		adj[v].add(w);//一条边在邻接表中表现为两个连接，自环也是相同的
 		adj[w].add(v);
 		E++;
 	}
