@@ -36,7 +36,7 @@ public class SimpleGraph extends Graph{
 
 	@Override
 	public void addEdge(int v, int w) {
-		adj[v].add(w);//一条边在邻接表中表现为两个连接，自环也是相同的
+		adj[v].add(w);//一条边在邻接表中表现为两个连接，自环也是相同的（区别与有向图
 		adj[w].add(v);
 		E++;
 	}

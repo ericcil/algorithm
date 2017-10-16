@@ -4,6 +4,7 @@ import dataStructure.Graph;
 
 /**
  * 双色图
+ * 《算法》 P362
  */
 public class TwoColor {
 

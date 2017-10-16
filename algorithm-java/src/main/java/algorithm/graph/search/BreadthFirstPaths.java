@@ -52,7 +52,7 @@ public class BreadthFirstPaths {
 			return null;
 		}
 		Stack<Integer> path = new Stack<Integer>();
-		for(int x = v;x != s; x=edgeTo[x]){//获取到的路径不是最段路径
+		for(int x = v;x != s; x=edgeTo[x]){
 			path.push(x);
 		}
 		path.push(s);
